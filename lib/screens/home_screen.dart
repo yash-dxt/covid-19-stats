@@ -27,17 +27,6 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
-//          FloatingActionButton(
-//            onPressed: () {},
-//            backgroundColor: Colors.white,
-//            mini: true,
-//            child: Icon(
-//
-//              Icons.arrow_forward_ios,
-//              color: Colors.orange,
-//            ),
-//
-//          )
           ]),
           Container(
             padding: EdgeInsets.only(left: 10, right: 10, top: 30),
@@ -47,13 +36,26 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ContainerNeuSquare(
+                      colourDark: Color(0xFFff053a),
+                      colourLight: Color(0xFFff5176),
+                      status: 'Confirmed',
+                      newNumber: '+' + total.newConfirmed,
+                      totalNumber: total.confirmed,
                       x: -10.0,
                       y: -10.0,
                     ),
                     SizedBox(
                       width: 20,
                     ),
-                    ContainerNeuSquare(x: 10.0, y: -10.0)
+                    ContainerNeuSquare(
+                      x: 10.0,
+                      y: -10.0,
+                      colourDark: Color(0xFF007bff),
+                      colourLight: Color(0xFF007bff),
+                      status: 'Active',
+                      newNumber: '',
+                      totalNumber: total.active,
+                    )
                   ],
                 ),
                 SizedBox(
@@ -62,11 +64,27 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ContainerNeuSquare(x: -10.0, y: 10.0),
+                    ContainerNeuSquare(
+                      x: -10.0,
+                      y: 10.0,
+                      colourDark: Color(0xFF28a744),
+                      colourLight: Color(0xFF73c685),
+                      status: 'Recovered',
+                      newNumber: '+' + total.newRecovered,
+                      totalNumber: total.recovered,
+                    ),
                     SizedBox(
                       width: 20,
                     ),
-                    ContainerNeuSquare(x: 10.0, y: 10.0),
+                    ContainerNeuSquare(
+                      x: 10.0,
+                      y: 10.0,
+                      colourDark: Color(0xFF6c757d),
+                      colourLight: Color(0xFFa4a8ae),
+                      status: 'Deceased',
+                      newNumber: '+' + total.newDeaths,
+                      totalNumber: total.deaths,
+                    ),
                   ],
                 )
               ],
@@ -155,11 +173,11 @@ class ContainerNeuSquare extends StatelessWidget {
   const ContainerNeuSquare(
       {@required this.x,
       @required this.y,
-      this.colourDark,
-      this.colourLight,
-      this.status,
-      this.newNumber,
-      this.totalNumber});
+     @required  this.colourDark,
+      @required this.colourLight,
+      @required this.status,
+     @required  this.newNumber,
+     @required  this.totalNumber});
 
   final double x, y;
   final Color colourDark;
@@ -176,9 +194,9 @@ class ContainerNeuSquare extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Confirmed',
+            status,
             style: TextStyle(
-                color: Color(0xFFff053a),
+                color: colourDark,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
                 letterSpacing: 1.3),
@@ -187,16 +205,16 @@ class ContainerNeuSquare extends StatelessWidget {
             height: 7,
           ),
           Text(
-            '1,233',
-            style: TextStyle(color: Color(0xFFff5176), letterSpacing: 1.2),
+            newNumber,
+            style: TextStyle(color: colourLight, letterSpacing: 1.2),
           ),
           SizedBox(
             height: 7,
           ),
           Text(
-            '22,315',
+            totalNumber,
             style: TextStyle(
-                color: Color(0xFFff053a),
+                color: colourDark,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
                 letterSpacing: 1.3),
