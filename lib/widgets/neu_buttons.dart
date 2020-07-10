@@ -118,16 +118,16 @@ class ContainerNeuLong extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   color: orange),
             ),
-            FloatingActionButton(
-              backgroundColor: bg,
-              heroTag: heroTag + 'a',
-              onPressed: () {},
-              child: Icon(
-                Icons.add,
-                color: orange,
-              ),
-              mini: true,
-            )
+//            FloatingActionButton(
+//              backgroundColor: bg,
+//              heroTag: heroTag + 'a',
+//              onPressed: () {},
+//              child: Icon(
+//                Icons.add,
+//                color: orange,
+//              ),
+//              mini: true,
+//            )
           ]),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

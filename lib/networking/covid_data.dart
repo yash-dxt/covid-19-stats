@@ -4,6 +4,7 @@ import 'package:covid_stats/models/covid_model.dart';
 import 'package:http/http.dart' as http;
 
 class CovidData {
+  List<CovidModel> userList = [];
   String url = 'https://api.covid19india.org/data.json';
 
   Future<List<CovidModel>> getTotalCases() async {
