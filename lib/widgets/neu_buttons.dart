@@ -78,6 +78,7 @@ class ContainerNeuSquare extends StatelessWidget {
 class ContainerNeuLong extends StatelessWidget {
   const ContainerNeuLong(
       {Key key,
+      @required this.function,
       @required this.state,
       @required this.heroTag,
       @required this.newConfirmed,
@@ -86,7 +87,7 @@ class ContainerNeuLong extends StatelessWidget {
       @required this.totalConfirmed,
       @required this.totalRecovered,
       @required this.totalDeaths,
-      @required this.active})
+      @required this.active, @required this.iconData})
       : super(key: key);
   final String state;
   final String heroTag;
@@ -97,66 +98,69 @@ class ContainerNeuLong extends StatelessWidget {
   final String totalRecovered;
   final String totalDeaths;
   final String active;
+  final Function function;
+  final IconData iconData;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 180,
-
       padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-            Text(
-              state,
-              style: TextStyle(
-                  fontSize: 20,
-                  letterSpacing: 1.5,
-                  fontWeight: FontWeight.w500,
-                  color: orange),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Expanded(
+              child: Text(
+                state == null ? 'State' : state,
+                style: TextStyle(
+                    fontSize: 20,
+                    letterSpacing: 1.5,
+                    fontWeight: FontWeight.w500,
+                    color: orange),
+              ),
             ),
-//            FloatingActionButton(
-//              backgroundColor: bg,
-//              heroTag: heroTag + 'a',
-//              onPressed: () {},
-//              child: Icon(
-//                Icons.add,
-//                color: orange,
-//              ),
-//              mini: true,
-//            )
+            FloatingActionButton(
+              backgroundColor: bg,
+              heroTag: heroTag + 'a',
+              onPressed: function,
+              child: Icon(
+                iconData,
+                color: orange,
+              ),
+              mini: true,
+            )
           ]),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SmallBlockForNeu(
-                colour: red,
-                status: 'Confirmed',
-                newAdded: newConfirmed,
-                total: totalConfirmed,
-              ),
-
-              SmallBlockForNeu(
-                colour: blue,
-                status: 'Active',
-                total: active,
-              ),
-              SmallBlockForNeu(
-                colour: green,
-                status: 'Recovered',
-                newAdded: newRecovered,
-                total: totalRecovered,
-              ),
-              SmallBlockForNeu(
-                colour: gray,
-                status: 'Deaths',
-                newAdded: newDeaths,
-                total: totalDeaths,
-              )
-            ],
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SmallBlockForNeu(
+                  colour: red,
+                  status: 'Confirmed',
+                  newAdded: newConfirmed,
+                  total: totalConfirmed,
+                ),
+                SmallBlockForNeu(
+                  colour: blue,
+                  status: 'Active',
+                  total: active,
+                ),
+                SmallBlockForNeu(
+                  colour: green,
+                  status: 'Recovered',
+                  newAdded: newRecovered,
+                  total: totalRecovered,
+                ),
+                SmallBlockForNeu(
+                  colour: gray,
+                  status: 'Deaths',
+                  newAdded: newDeaths,
+                  total: totalDeaths,
+                )
+              ],
+            ),
           )
         ],
       ),
@@ -186,7 +190,8 @@ class SmallBlockForNeu extends StatelessWidget {
     this.status,
     this.newAdded,
     this.total,
-    Key key, this.colour,
+    Key key,
+    this.colour,
   }) : super(key: key);
   final String status, newAdded, total;
   final Color colour;
@@ -200,15 +205,21 @@ class SmallBlockForNeu extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(status, style: style),
+          Text(status , style: style),
           SizedBox(
             height: 7,
           ),
-          Text(newAdded == null ? '' : '+' + newAdded, style: style,),
+          Text(
+            newAdded == null ? '' : '+' + newAdded,
+            style: style,
+          ),
           SizedBox(
             height: 7,
           ),
-          Text(total, style: style,)
+          Text(
+            total == null ? '' : total,
+            style: style,
+          )
         ],
       ),
     );

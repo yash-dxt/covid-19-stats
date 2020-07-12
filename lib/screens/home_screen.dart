@@ -1,18 +1,22 @@
 import 'dart:async';
 
 import 'package:covid_stats/models/covid_model.dart';
+import 'package:covid_stats/networking/covid_data.dart';
 import 'package:covid_stats/screens/states_list_screen.dart';
+import 'package:covid_stats/screens/user_list_screen.dart';
 import 'package:covid_stats/widgets/colors.dart';
 import 'package:covid_stats/widgets/neu_buttons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    List<CovidModel> userList= Provider.of<CovidData>(context).userList;
+
     return Consumer<List<CovidModel>>(builder: (context, data, child) {
       final snackBar = SnackBar(
         content: Text('Yay! A SnackBar!'),
@@ -52,7 +56,8 @@ class HomeScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => StatesListScreen(data)));
+                                builder: (context) =>
+                                    StatesListScreen(data: data,userList: userList)));
                       },
                       mini: true,
                       backgroundColor: Colors.white,
@@ -79,7 +84,6 @@ class HomeScreen extends StatelessWidget {
                     FloatingActionButton(
                       heroTag: 'bg1',
                       onPressed: () {
-                        Scaffold.of(context).showSnackBar(snackBar);
                       },
                       mini: true,
                       backgroundColor: Colors.white,
@@ -153,70 +157,61 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 30,
+                  ),
+
+                  Center(
+                      child: Container(
+                        height: .35,
+                        width: MediaQuery.of(context).size.width / 1.2,
+                        color: orange,
+                      )),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 23,
+                      ),
+                      Text('Your States',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: orange,
+                            letterSpacing: 2,
+                          )),
+                      FloatingActionButton(
+                        heroTag: 'herotag1',
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      UserListScreen(userList)));
+                        },
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: orange,
+                        ),
+                        mini: true,
+                        backgroundColor: Colors.white,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   Center(
-                      child: Text(
-                    'Stay Safe!',
-                    style: TextStyle(
-                        color: orange, letterSpacing: 1.5, fontSize: 20),
+                      child: Container(
+                    height: .35,
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    color: orange,
                   )),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
-                  Center(
-                      child: Text(
-                    '( more updates coming soon )',
-                    style: TextStyle(
-                        color: orange, letterSpacing: 1.5, fontSize: 12),
-                  ))
-
-//                  Row(
-//                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                    crossAxisAlignment: CrossAxisAlignment.center,
-//                    children: [
-//                      SizedBox(
-//                        width: 23,
-//                      ),
-//                      Text('Your States',
-//                          style: TextStyle(
-//                            fontSize: 20,
-//                            color: orange,
-//                            letterSpacing: 2,
-//                          )),
-//                      FloatingActionButton(
-//                        heroTag: 'herotag1',
-//                        onPressed: () {
-//                          Navigator.push(
-//                              context,
-//                              MaterialPageRoute(
-//                                  builder: (context) =>
-//                                      StatesListScreen(data)));
-//                        },
-//                        child: Icon(
-//                          Icons.add,
-//                          color: orange,
-//                        ),
-//                        mini: true,
-//                        backgroundColor: Colors.white,
-//                      )
-//                    ],
-//                  ),
-//                  SizedBox(
-//                    height: 20,
-//                  ),
-//                  Center(
-//                      child: Container(
-//                    height: .35,
-//                    width: MediaQuery.of(context).size.width / 1.2,
-//                    color: orange,
-//                  )),
-//                  SizedBox(
-//                    height: 20,
-//                  ),
-//                ContainerNeuLong(),
-//                ContainerNeuLong(),
-//                ContainerNeuLong()
                 ]),
               ),
       );

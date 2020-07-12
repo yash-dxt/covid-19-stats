@@ -1,12 +1,15 @@
 import 'package:covid_stats/models/covid_model.dart';
+import 'package:covid_stats/networking/covid_data.dart';
 import 'package:covid_stats/widgets/colors.dart';
 import 'package:covid_stats/widgets/neu_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class StatesListScreen extends StatelessWidget {
-  StatesListScreen(this.data);
+  StatesListScreen( {this.data, this.userList});
 
   final List<CovidModel> data;
+  final List<CovidModel> userList;
 
   @override
   Widget build(BuildContext context) {
@@ -48,21 +51,29 @@ class StatesListScreen extends StatelessWidget {
                 ),
               )
             ]),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Expanded(
               child: ListView.builder(
-                  itemCount: data.length,
+                  itemCount: data2.length,
                   itemBuilder: (BuildContext context, int index) {
-                      return ContainerNeuLong(
-                        heroTag: '$index',
-                        state: data2[index].state,
-                        newConfirmed: data2[index].newConfirmed,
-                        newRecovered: data2[index].newRecovered,
-                        newDeaths: data2[index].newDeaths,
-                        totalConfirmed: data2[index].confirmed,
-                        totalDeaths: data2[index].deaths,
-                        totalRecovered: data2[index].recovered, active: data2[index].active,
-                      );
+                    CovidModel element = data2[index];
+                    return ContainerNeuLong(
+                      heroTag: '$index' + 'aloo',
+                      state: element.state,
+                      newConfirmed: element.newConfirmed,
+                      newRecovered: element.newRecovered,
+                      newDeaths: element.newDeaths,
+                      totalConfirmed: element.confirmed,
+                      totalDeaths: element.deaths,
+                      totalRecovered: element.recovered,
+                      active: element.active,
+                      function: () {
+                        userList.add(element);
+                      },
+                      iconData: Icons.add,
+                    );
                   }),
             )
           ],
