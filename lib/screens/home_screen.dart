@@ -15,18 +15,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<CovidModel> userList= Provider.of<CovidData>(context).userList;
+    CovidData covidData = CovidData();
 
     return Consumer<List<CovidModel>>(builder: (context, data, child) {
-      final snackBar = SnackBar(
-        content: Text('Yay! A SnackBar!'),
-        action: SnackBarAction(
-          label: 'Undo',
-          onPressed: () {
-            // Some code to undo the change.
-          },
-        ),
-      );
+
       return Scaffold(
         backgroundColor: bg,
         body: (data == null)
@@ -57,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    StatesListScreen(data: data,userList: userList)));
+                                    StatesListScreen(data: data,covidData:covidData)));
                       },
                       mini: true,
                       backgroundColor: Colors.white,
@@ -189,7 +181,7 @@ class HomeScreen extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      UserListScreen(userList)));
+                                      UserListScreen(covidData)));
                         },
                         child: Icon(
                           Icons.arrow_forward_ios,

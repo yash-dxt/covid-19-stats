@@ -6,12 +6,28 @@ import 'package:http/http.dart' as http;
 
 class CovidData with ChangeNotifier {
   List<CovidModel> userList = [];
+  bool a = false;
 
   String url = 'https://api.covid19india.org/data.json';
+  int get userListLength => userList.length;
 
 
+
+  bool alreadyInList(CovidModel covidModel){
+    if(userList.contains(covidModel)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
   void addCovidModel(CovidModel covidModel){
-    userList.add(covidModel);
+    if(userList.contains(covidModel)== false){
+      userList.add(covidModel);
+
+    }else{
+      print('already in list');
+    }
     notifyListeners();
     print(userList.length);
   }

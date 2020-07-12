@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class StatesListScreen extends StatelessWidget {
-  StatesListScreen( {this.data, this.userList});
+  StatesListScreen({this.data, this.covidData});
 
   final List<CovidModel> data;
-  final List<CovidModel> userList;
+  final CovidData covidData;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,9 @@ class StatesListScreen extends StatelessWidget {
                       totalRecovered: element.recovered,
                       active: element.active,
                       function: () {
-                        userList.add(element);
+                        covidData.alreadyInList(element)
+                            ? Scaffold.of(context).showSnackBar(SnackBar(content: Text('Already In Your List!')))
+                            : covidData.addCovidModel(element);
                       },
                       iconData: Icons.add,
                     );

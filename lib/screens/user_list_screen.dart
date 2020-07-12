@@ -4,10 +4,16 @@ import 'package:covid_stats/widgets/colors.dart';
 import 'package:covid_stats/widgets/neu_buttons.dart';
 import 'package:flutter/material.dart';
 
-class UserListScreen extends StatelessWidget {
-  UserListScreen(this.userList);
+class UserListScreen extends StatefulWidget {
+  UserListScreen(this.covidData);
 
-  final List<CovidModel> userList;
+  final CovidData covidData;
+
+  @override
+  _UserListScreenState createState() => _UserListScreenState();
+}
+
+class _UserListScreenState extends State<UserListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,9 +56,9 @@ class UserListScreen extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-              itemCount: userList.length,
+              itemCount: widget.covidData.userListLength,
               itemBuilder: (BuildContext context, int index) {
-                CovidModel element = userList[index];
+                CovidModel element = widget.covidData.userList[index];
                 return ContainerNeuLong(
                   iconData: Icons.remove,
                   heroTag: '$index' + 'aloo2',
@@ -65,7 +71,9 @@ class UserListScreen extends StatelessWidget {
                   totalRecovered: element.recovered,
                   active: element.active,
                   function: () {
-                    userList.remove(element);
+                    setState(() {
+                      widget.covidData.removeCovidModel(element);
+                    });
                   },
                 );
               }),
