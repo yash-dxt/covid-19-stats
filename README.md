@@ -4,5 +4,5 @@ It shows total stats, and the statewise stats!
 It has the famous Neumorphic Design and is implemented in flutter using the Provider architecture!
 
 # THIS IS THE PROJECT GIF!
-[](XLLjk1FMXk.gif)
+![](XLLjk1FMXk.gif)
 
