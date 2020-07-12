@@ -3,7 +3,7 @@ import 'package:covid_stats/networking/covid_data.dart';
 import 'package:covid_stats/widgets/colors.dart';
 import 'package:covid_stats/widgets/neu_buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/widgets.dart';
 
 class StatesListScreen extends StatelessWidget {
   StatesListScreen({this.data, this.covidData});
@@ -13,7 +13,10 @@ class StatesListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double widthOfDevice = MediaQuery.of(context).size.width;
+    double heightOfDevice = MediaQuery.of(context).size.height;
     List<CovidModel> data2 = data.sublist(1);
+    print(widthOfDevice);
     return Scaffold(
       backgroundColor: bg,
       body: Container(
@@ -22,35 +25,34 @@ class StatesListScreen extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            Row(children: [
-              SizedBox(
-                width: 160,
-              ),
-              Text(
-                'STATES',
-                style: TextStyle(
-                    fontSize: 20,
-                    color: orange,
-                    letterSpacing: 2,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                width: 105,
-              ),
-              FloatingActionButton(
-                heroTag: 'bg2',
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                mini: true,
-                backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  size: 20,
-                  color: orange,
-                ),
-              )
-            ]),
+            Container(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'STATES',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: orange,
+                          letterSpacing: 2,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    FloatingActionButton(
+                      heroTag: 'bg2',
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      mini: true,
+                      backgroundColor: Colors.white,
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: 20,
+                        color: orange,
+                      ),
+                    )
+                  ]),
+            ),
             SizedBox(
               height: 20,
             ),
@@ -71,7 +73,8 @@ class StatesListScreen extends StatelessWidget {
                       active: element.active,
                       function: () {
                         covidData.alreadyInList(element)
-                            ? Scaffold.of(context).showSnackBar(SnackBar(content: Text('Already In Your List!')))
+                            ? Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text('Already In Your List!')))
                             : covidData.addCovidModel(element);
                       },
                       iconData: Icons.add,

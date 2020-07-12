@@ -22,37 +22,33 @@ class _UserListScreenState extends State<UserListScreen> {
         SizedBox(
           height: 50,
         ),
-        Row(children: [
-          SizedBox(
-            width: 100,
-          ),
-          Text(
-            'Your States ',
-            style: TextStyle(
-                fontSize: 20,
-                color: orange,
-                letterSpacing: 2,
-                fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            width: 105,
-          ),
-          FloatingActionButton(
-            heroTag: 'herotag1',
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            mini: true,
-            backgroundColor: Colors.white,
-            child: Icon(
-              Icons.arrow_back_ios,
-              size: 20,
-              color: orange,
+        Container(
+          padding: EdgeInsets.only(left:15, right: 15),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+            Text(
+              'Your States ',
+              style: TextStyle(
+                  fontSize: 20,
+                  color: orange,
+                  letterSpacing: 2,
+                  fontWeight: FontWeight.bold),
             ),
-          )
-        ]),
-        SizedBox(
-          height: 10,
+            FloatingActionButton(
+              heroTag: 'herotag1',
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              mini: true,
+              backgroundColor: Colors.white,
+              child: Icon(
+                Icons.arrow_back_ios,
+                size: 20,
+                color: orange,
+              ),
+            )
+          ]),
         ),
         Expanded(
           child: ListView.builder(

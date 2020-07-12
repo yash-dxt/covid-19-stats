@@ -2,14 +2,16 @@ import 'package:covid_stats/widgets/colors.dart';
 import 'package:flutter/material.dart';
 
 class ContainerNeuSquare extends StatelessWidget {
-  const ContainerNeuSquare(
-      {@required this.x,
-      @required this.y,
-      @required this.colourDark,
-      @required this.colourLight,
-      @required this.status,
-      @required this.newNumber,
-      @required this.totalNumber});
+  const ContainerNeuSquare({
+    @required this.x,
+    @required this.y,
+    @required this.colourDark,
+    @required this.colourLight,
+    @required this.status,
+    @required this.newNumber,
+    @required this.totalNumber,
+    @required this.widthOfDevice,
+  });
 
   final double x, y;
   final Color colourDark;
@@ -17,11 +19,13 @@ class ContainerNeuSquare extends StatelessWidget {
   final String status;
   final String newNumber; //add + before this
   final String totalNumber;
+  final double widthOfDevice;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10),
+
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -53,21 +57,21 @@ class ContainerNeuSquare extends StatelessWidget {
           ),
         ],
       ),
-      width: 150,
-      height: 150,
+      width: widthOfDevice / 3,
+      height: widthOfDevice / 3,
       decoration: BoxDecoration(
         color: Color(0xFFf0f2f5),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
               color: Colors.white,
-              blurRadius: 20,
-              spreadRadius: 10,
+              blurRadius: widthOfDevice / 25,
+              spreadRadius: widthOfDevice / 45,
               offset: Offset(x, y)),
           BoxShadow(
             color: Color.fromRGBO(206, 213, 222, 1),
-            blurRadius: 20,
-            spreadRadius: 10,
+            blurRadius: widthOfDevice / 25,
+            spreadRadius: widthOfDevice / 45,
           ),
         ],
       ),
@@ -76,19 +80,20 @@ class ContainerNeuSquare extends StatelessWidget {
 }
 
 class ContainerNeuLong extends StatelessWidget {
-  const ContainerNeuLong(
-      {Key key,
-      @required this.function,
-      @required this.state,
-      @required this.heroTag,
-      @required this.newConfirmed,
-      @required this.newRecovered,
-      @required this.newDeaths,
-      @required this.totalConfirmed,
-      @required this.totalRecovered,
-      @required this.totalDeaths,
-      @required this.active, @required this.iconData})
-      : super(key: key);
+  const ContainerNeuLong({
+    Key key,
+    @required this.function,
+    @required this.state,
+    @required this.heroTag,
+    @required this.newConfirmed,
+    @required this.newRecovered,
+    @required this.newDeaths,
+    @required this.totalConfirmed,
+    @required this.totalRecovered,
+    @required this.totalDeaths,
+    @required this.active,
+    @required this.iconData,
+  }) : super(key: key);
   final String state;
   final String heroTag;
   final String newConfirmed;
@@ -133,33 +138,36 @@ class ContainerNeuLong extends StatelessWidget {
             )
           ]),
           Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SmallBlockForNeu(
-                  colour: red,
-                  status: 'Confirmed',
-                  newAdded: newConfirmed,
-                  total: totalConfirmed,
-                ),
-                SmallBlockForNeu(
-                  colour: blue,
-                  status: 'Active',
-                  total: active,
-                ),
-                SmallBlockForNeu(
-                  colour: green,
-                  status: 'Recovered',
-                  newAdded: newRecovered,
-                  total: totalRecovered,
-                ),
-                SmallBlockForNeu(
-                  colour: gray,
-                  status: 'Deaths',
-                  newAdded: newDeaths,
-                  total: totalDeaths,
-                )
-              ],
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SmallBlockForNeu(
+                    colour: red,
+                    status: 'Confirmed',
+                    newAdded: newConfirmed,
+                    total: totalConfirmed,
+                  ),
+                  SmallBlockForNeu(
+                    colour: blue,
+                    status: 'Active',
+                    total: active,
+                  ),
+                  SmallBlockForNeu(
+                    colour: green,
+                    status: 'Recovered',
+                    newAdded: newRecovered,
+                    total: totalRecovered,
+                  ),
+                  SmallBlockForNeu(
+                    colour: gray,
+                    status: 'Deaths',
+                    newAdded: newDeaths,
+                    total: totalDeaths,
+                  )
+                ],
+              ),
             ),
           )
         ],
@@ -205,7 +213,7 @@ class SmallBlockForNeu extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(status , style: style),
+          Text(status, style: style),
           SizedBox(
             height: 7,
           ),
