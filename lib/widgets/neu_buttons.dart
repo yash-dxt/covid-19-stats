@@ -57,8 +57,8 @@ class ContainerNeuSquare extends StatelessWidget {
           ),
         ],
       ),
-      width: widthOfDevice / 3,
-      height: widthOfDevice / 3,
+      width: widthOfDevice / 2.7,
+      height: widthOfDevice / 2.7,
       decoration: BoxDecoration(
         color: Color(0xFFf0f2f5),
         borderRadius: BorderRadius.circular(20),

@@ -58,9 +58,9 @@ class StatesListScreen extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: data2.length,
+                  itemCount: data.length -1,
                   itemBuilder: (BuildContext context, int index) {
-                    CovidModel element = data2[index];
+                    CovidModel element = data[index+1];
                     return ContainerNeuLong(
                       heroTag: '$index' + 'aloo',
                       state: element.state,

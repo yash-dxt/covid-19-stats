@@ -27,9 +27,19 @@ class CovidModel {
         active: json['active'],
         deaths: json['deaths'],
         recovered: json['recovered'],
-        lastDate: json['lastDate'],
         newConfirmed: json['deltaconfirmed'],
         newDeaths: json['deltadeaths'],
         newRecovered: json['deltarecovered']);
   }
+
+  Map<String, dynamic> toMap() => {
+        'state': state,
+        'confirmed': confirmed,
+        'active': active,
+        'deaths': deaths,
+        'recovered': recovered,
+        'deltaconfirmed': newConfirmed,
+        'deltadeaths': newDeaths,
+        'deltarecovered': newRecovered
+      };
 }
