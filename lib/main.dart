@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         var covidData = CovidData();
         covidData.getIndiaList();
         covidData.getUserList();
+        covidData.updateUserList();
         return covidData;
       },
       child: MaterialApp(debugShowCheckedModeBanner: false, home: HomeScreen()),

@@ -51,7 +51,14 @@ class CovidDatabase {
     var a = db.delete('covidTable', where: 'state = ?', whereArgs: [state]);
     return a;
   }
+  
+  
+  Future<int> updateList(CovidModel covidModel) async{
+    final db = await database;
+    var a = db.update('covidTable', covidModel.toMap(), where: 'state = ?', whereArgs: [covidModel.state]);
+    return a;
 
+  }
   Future<List<CovidModel>> getUserList() async {
     final db = await database;
     var a = await db.query('covidTable');

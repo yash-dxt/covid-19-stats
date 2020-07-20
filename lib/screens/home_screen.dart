@@ -27,6 +27,7 @@ class HomeScreen extends StatelessWidget {
             color: bg,
             onRefresh: () async {
               covidData.getIndiaList();
+              covidData.updateUserList();
               Future.delayed(Duration(milliseconds: 500));
             },
             height: 60,

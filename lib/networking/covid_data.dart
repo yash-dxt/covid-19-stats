@@ -51,4 +51,12 @@ class CovidData with ChangeNotifier {
       return false;
     }
   }
+
+  void updateUserList(){
+    for(int i=0; i<userListLength; i++){
+      CovidDatabase.db.updateList(userList[i]);
+      notifyListeners();
+    }
+
+  }
 }

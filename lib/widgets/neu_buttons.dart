@@ -33,7 +33,7 @@ class ContainerNeuSquare extends StatelessWidget {
             status,
             style: TextStyle(
                 color: colourDark,
-                fontSize: 20,
+                fontSize: 16,
                 fontWeight: FontWeight.w500,
                 letterSpacing: 1.3),
           ),
@@ -42,7 +42,7 @@ class ContainerNeuSquare extends StatelessWidget {
           ),
           Text(
             newNumber,
-            style: TextStyle(color: colourLight, letterSpacing: 1.2),
+            style: TextStyle(color: colourLight, letterSpacing: 1.2,  ),
           ),
           SizedBox(
             height: 7,
@@ -51,7 +51,7 @@ class ContainerNeuSquare extends StatelessWidget {
             totalNumber,
             style: TextStyle(
                 color: colourDark,
-                fontSize: 20,
+                fontSize: 16,
                 fontWeight: FontWeight.w500,
                 letterSpacing: 1.3),
           ),
@@ -109,7 +109,7 @@ class ContainerNeuLong extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
+      height: 200,
       padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,7 +206,7 @@ class SmallBlockForNeu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle style = TextStyle(color: colour, letterSpacing: 1.2);
+    TextStyle style = TextStyle(color: colour, letterSpacing: 1.2, );
     return Container(
       padding: EdgeInsets.all(3),
       margin: EdgeInsets.all(3),
