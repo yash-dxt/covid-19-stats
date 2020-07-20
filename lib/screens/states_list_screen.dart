@@ -58,9 +58,9 @@ class StatesListScreen extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: data.length -1,
+                  itemCount: data.length - 1,
                   itemBuilder: (BuildContext context, int index) {
-                    CovidModel element = data[index+1];
+                    CovidModel element = data[index + 1];
                     return ContainerNeuLong(
                       heroTag: '$index' + 'aloo',
                       state: element.state,
@@ -72,10 +72,15 @@ class StatesListScreen extends StatelessWidget {
                       totalRecovered: element.recovered,
                       active: element.active,
                       function: () {
-                        covidData.alreadyInList(element)
-                            ? Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text('Already In Your List!')))
-                            : covidData.addCovidModel(element);
+                        if (covidData.alreadyInList(element)) {
+                          Scaffold.of(context).showSnackBar(
+                              SnackBar(content: Text('Already In Your List!')));
+                        } else {
+                          covidData.addCovidModel(element);
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                  element.state + ' added to your list!')));
+                        }
                       },
                       iconData: Icons.add,
                     );

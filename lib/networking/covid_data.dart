@@ -45,7 +45,8 @@ class CovidData with ChangeNotifier {
   }
 
   bool alreadyInList(CovidModel covidModel) {
-    if (userList.contains(covidModel)) {
+    getUserList();
+    if (userList.contains(covidModel.state)) {
       return true;
     } else {
       return false;

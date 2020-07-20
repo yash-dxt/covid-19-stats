@@ -207,7 +207,10 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: bg,
           body: Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              backgroundColor: orange,
+
+            ),
           ),
         );
       }

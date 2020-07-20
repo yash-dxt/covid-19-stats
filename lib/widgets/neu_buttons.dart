@@ -17,7 +17,7 @@ class ContainerNeuSquare extends StatelessWidget {
   final Color colourDark;
   final Color colourLight;
   final String status;
-  final String newNumber; //add + before this
+  final String newNumber;
   final String totalNumber;
   final double widthOfDevice;
 
@@ -33,7 +33,7 @@ class ContainerNeuSquare extends StatelessWidget {
             status,
             style: TextStyle(
                 color: colourDark,
-                fontSize: 16,
+                fontSize: 0.044*widthOfDevice,
                 fontWeight: FontWeight.w500,
                 letterSpacing: 1.3),
           ),
